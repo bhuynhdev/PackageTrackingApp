@@ -1,0 +1,10 @@
+[phases.setup]
+providers = ['python']
+nixPkgs = ['gcc', 'python39', 'python39Packages.psycopg2']
+aptPkgs = ['libpq-dev']
+
+[phases.install]
+cmds = ['sudo apt-get install libgssapi-krb5-2 --reinstall', 'python -m venv /opt/venv && . /opt/venv/bin/activate && pip install -r requirements.txt']
+
+[start]
+cmd = '. /opt/venv/bin/activate && gunicorn app:app'
